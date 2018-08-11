@@ -28,17 +28,15 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   Stream<int> countTo(int x) async* {
     for (var i = 0; i <= x; i++) {
+      await Future.delayed(Duration(milliseconds: 200));
       yield i;
     }
   }
 
   void _incrementCounter() async {
-    await for (var s in countTo(_counter+1)) {
-      await Future.delayed(Duration(milliseconds: 200));
-      setState(() {
-        _counter = s;
-      });
-    }
+    countTo(_counter + 1).listen((int s) => setState(() {
+          _counter = s;
+        }));
   }
 
   @override
