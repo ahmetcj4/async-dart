@@ -26,19 +26,19 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-
-  Future<Function> addAsync(int x) async {
-    return (int y) async => x + y;
+  Stream<int> countTo(int x) async* {
+    for (var i = 0; i <= x; i++) {
+      yield i;
+    }
   }
 
   void _incrementCounter() async {
-    var s = await addAsync(_counter).then(
-      (x) => x(1),
-    );
-
-    setState(() {
-      _counter = s;
-    });
+    await for (var s in countTo(_counter+1)) {
+      await Future.delayed(Duration(milliseconds: 200));
+      setState(() {
+        _counter = s;
+      });
+    }
   }
 
   @override
