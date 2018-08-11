@@ -27,18 +27,16 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  Future<int> loadInt(){
-    return Future.delayed(Duration(seconds: 1)).then((_){
-      return 1;
-    });
+  Future<int> loadInt() async {
+    await Future.delayed(Duration(seconds: 1));
+    return 1;
   } 
-  void _incrementCounter() {
-    loadInt().then((s)=> 
-      setState(() {
-        _counter = _counter+s;
-      })
-    );
-  
+  void _incrementCounter() async {
+    var s = await loadInt();
+     
+    setState(() {
+      _counter = _counter+s;
+    });
   }
 
   @override
@@ -52,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             new Text(
-              'pushed the 1-second-delayed button this many times:',
+              'Pushed the 1-second-delayed button this many times:',
             ),
             new Text(
               '$_counter',
