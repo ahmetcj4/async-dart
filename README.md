@@ -1,8 +1,3 @@
 # asyncronous_dart
 
-A new Flutter project.
-
-## Getting Started
-
-For help getting started with Flutter, view our online
-[documentation](https://flutter.io/).
+Sample flutter counter app that counts number to the current value asyncronously.
